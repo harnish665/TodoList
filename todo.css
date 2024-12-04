@@ -1,0 +1,39 @@
+.top-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+.user-input{
+  border-color: green;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+}
+.due-date {
+   border-color: green;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+   
+}
+.add-btn {
+  border: none;
+  color: white;
+  background-color: green;
+  border-radius: 20px;
+  padding:10px;
+}
+
+.clear-btn {
+  border: none;
+  color: white;
+  background-color: red;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+  width: 155px;
+}
