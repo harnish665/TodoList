@@ -93,7 +93,9 @@ p {
       <script>
 //let todoArray = [];
 let todoArray = JSON.parse(localStorage.getItem("todoArrays"));
-
+if (!todoArray){
+    let todoArray = [];
+}
 renderTodo()
 
 
