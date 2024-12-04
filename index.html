@@ -90,8 +90,8 @@ p {
       <div id="todo-container" class="todo-box todo-div"></div>
 
       <script>
-let todoArray = [];
-//let todoArray = JSON.parse(localStorage.getItem("todoArrays"));
+//let todoArray = [];
+let todoArray = JSON.parse(localStorage.getItem("todoArrays"));
 
 renderTodo()
 
@@ -161,7 +161,7 @@ function addTodo () {
   dateElement.value = "";
 
 
- // localStorage.setItem("todoArrays", JSON.stringify(todoArray))
+ localStorage.setItem("todoArrays", JSON.stringify(todoArray))
 }
       </script>
     </body>
