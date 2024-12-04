@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>todoList</title>
+        <link rel="stylesheet" href="css/todo.css" />
+    </head>
+    <body>
+      <style>
+.top-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+.user-input{
+  border-color: green;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+}
+.due-date {
+   border-color: green;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+   
+}
+.add-btn {
+  border: none;
+  color: white;
+  background-color: green;
+  border-radius: 20px;
+  padding:10px;
+}
+
+.clear-btn {
+  border: none;
+  color: white;
+  background-color: red;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+  width: 155px;
+}
+.todo-div {
+  display: grid;
+  grid-template-columns:20px 1fr 150px 70px;
+  column-gap: 5px;
+  place-items: center;
+  justify-items: start;
+  background-color: aqua;
+  border-radius:5px;
+}
+.delete-button {
+  border: none;
+  color: white;
+  background-color: red;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  padding:10px;
+}
+.due-date{
+  font-size: 15px;
+}
+p {
+  font-size: 20px;
+
+}
+.striked {
+  text-decoration: line-through;
+}
+      </style>
+      
+      <h1>Todo Lists<h1>
+      <div class="top-container">
+        <input type="text" class="user-input js-userInput" placeholder="Input a Todo"/>
+        
+        <input type="date" class="due-date js-dateInput"/>
+        
+        <button class="add-btn js-addBtn" onclick="addTodo()"
+            >Add</button>
+        <button class="clear-btn js-clearAllBtn" onclick="cleared()">Clear all</button>
+        </div>
+        <hr />
+      <div id="todo-container" class="todo-box todo-div"></div>
+
+      <script>
+        //let todoArray = [];
+let todoArray = JSON.parse(localStorage.getItem("todoArrays"));
+
+renderTodo()
+
+
+
+function renderTodo () {
+  let todoHtml = "" //initialize empty todoHtml
+
+  for (i = 0; i < todoArray.length; i++) {
+    const todoObject = todoArray[i];
+    const name = todoObject.name;
+    const dueDate = todoObject.date;
+    let html = `
+    <input type="checkbox" class="checker"/>
+    <div>
+
+    <p class="todoName">
+
+    ${name}
+    </p>
+    </div>
+    <div class="due-date">
+    ${dueDate}
+    </div>
+    <div>
+    <button class="delete-button" onclick="
+    todoArray.splice(${i}, 1)
+    renderTodo();
+    ">Delete</button>
+    </div>
+    `
+    todoHtml += html
+  }
+  document.querySelector(".todo-box").innerHTML = todoHtml
+
+
+  return todoHtml
+}
+
+function cleared() {
+  todoArray = [];
+  renderTodo()
+}
+
+function addTodo () {
+
+  let inputElement = document.querySelector(".js-userInput")
+  let dateElement = document.querySelector(".js-dateInput")
+  let todoName = inputElement.value.trim();
+  let dueDate = dateElement.value
+
+  todoArray.push({
+    name: todoName,
+    date: dueDate,
+  })
+
+  if (!todoName && !dueDate) {
+    todoHtml = renderTodo();
+    todoHtml = ""
+    document.getElementById("todo-container").classList.remove(".todo-div")
+
+
+  }
+  renderTodo();
+
+  inputElement.value = ""
+  dateElement.value = "";
+
+
+  localStorage.setItem("todoArrays", JSON.stringify(todoArray))
+}
+      </script>
+    </body>
+</html>
