@@ -105,81 +105,91 @@ media (min-width:600px){
       <div id="todo-container" class="todo-box todo-div"></div>
 
       <script>
-//let todoArray = [];
-let todoArray = JSON.parse(localStorage.getItem("todoArrays"));
-if (!todoArray){
-    let todoArray = [];
-}
-renderTodo()
 
+          //let todoArray = [];
+// Initialize the todo array from localStorage or as an empty array
+let todoArray = JSON.parse(localStorage.getItem("todoArrays")) || [];
 
+renderTodo();
 
-function renderTodo () {
-  let todoHtml = "" //initialize empty todoHtml
+function renderTodo() {
+  let todoHtml = ""; // Initialize empty todoHtml
 
-  for (i = 0; i < todoArray.length; i++) {
+  for (let i = 0; i < todoArray.length; i++) {
     const todoObject = todoArray[i];
     const name = todoObject.name;
     const dueDate = todoObject.date;
+
     let html = `
-    <input type="checkbox" class="checker"/>
-    <div>
-
-    <p class="todoName">
-
-    ${name}
-    </p>
-    </div>
-    <div class="due-date">
-    ${dueDate}
-    </div>
-    <div>
-    <button class="delete-button" onclick="
-    todoArray.splice(${i}, 1)
-    renderTodo();
-    ">Delete</button>
-    </div>
-    `
-    todoHtml += html
+      <input type="checkbox" class="checker"/>
+      <div>
+        <p class="todoName">${name}</p>
+      </div>
+      <div class="due-date">${dueDate}</div>
+      <div>
+        <button class="delete-button" onclick="
+          todoArray.splice(${i}, 1);
+          renderTodo();
+          localStorage.setItem('todoArrays', JSON.stringify(todoArray));
+        ">Delete</button>
+      </div>
+    `;
+    todoHtml += html;
   }
-  document.querySelector(".todo-box").innerHTML = todoHtml
 
-
-  return todoHtml
+  document.querySelector(".todo-box").innerHTML = todoHtml;
 }
 
 function cleared() {
   todoArray = [];
-  renderTodo()
+  renderTodo();
+  localStorage.removeItem("todoArrays");
 }
 
-function addTodo () {
+// Handle input validation and adding todos
+const buttonElem = document.querySelector(".js-addBtn");
+const inputElement = document.querySelector(".js-userInput");
+const dateElement = document.querySelector(".js-dateInput");
 
-  let inputElement = document.querySelector(".js-userInput")
-  let dateElement = document.querySelector(".js-dateInput")
-  let todoName = inputElement.value.trim();
-  let dueDate = dateElement.value
+// Disable button by default
+buttonElem.disabled = true;
+
+// Enable/Disable the button based on input field value
+inputElement.addEventListener("input", () => {
+  if (inputElement.value.trim() !== "") {
+    buttonElem.disabled = false;
+    buttonElem.classList.add("active-btn");
+  } else {
+    buttonElem.disabled = true;
+    buttonElem.classList.remove("active-btn");
+  }
+});
+
+buttonElem.addEventListener("click", function () {
+  const todoName = inputElement.value.trim();
+  const dueDate = dateElement.value;
+
+  if (todoName === "") {
+    alert("Please enter a todo before adding!");
+    return; // Prevent adding empty todos
+  }
 
   todoArray.push({
     name: todoName,
     date: dueDate,
-  })
+  });
 
-  if (!todoName && !dueDate) {
-    todoHtml = renderTodo();
-    todoHtml = ""
-    document.getElementById("todo-container").classList.remove(".todo-div")
-
-
-  }
   renderTodo();
 
-  inputElement.value = ""
+  // Clear input fields
+  inputElement.value = "";
   dateElement.value = "";
+  buttonElem.disabled = true; // Disable the button again
+  buttonElem.classList.remove("active-btn");
 
+  localStorage.setItem("todoArrays", JSON.stringify(todoArray));
+});
 
- localStorage.setItem("todoArrays", JSON.stringify(todoArray))
-}
       </script>
     </body>
 </html>
