@@ -8,21 +8,36 @@
     </head>
     <body>
       <style>
+          
+@media (min-width: 600px) {
+  body {
+    max-width: 700px;
+    display: flex;
+    
+  }
+  .title {
+    display: none;
+  }
+}
+
 .top-container{
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 5px;
+  border: 1px solid teal;
   row-gap: 5px;
-    max-width: 420px;
+  border-radius: 5px;
 }
 form{
-  border: 0 0 1px 0;
+  
+  padding: 10px;
   justify-items: center;
-  border-radius: 5px;
+  
   display: grid;
   font-size: 15px;
   grid-template-columns:1fr;
   row-gap: 10px;
+  vertical-align: center;
 }
 .user-input{
   border-color: green;
@@ -40,7 +55,7 @@ form{
    
 }
 .add-btn {
-  margin: 10px 20px;
+
   width: 150px;
   border: none;
   color: white;
@@ -54,11 +69,8 @@ form{
 
 .clear-btn {
   border: none;
-  margin-left: 25px;
   color: white;
   background-color: red;
-  border-width: 1px;
-  border-style: solid;
   border-radius: 20px;
   padding:10px;
   width: 150px;
@@ -88,23 +100,10 @@ p {
   font-size: 17px;
 
 }
-media (min-width:420px){
-        body{
-        
-          justify-content: center;
-          align-items: center;
-          max-width: 416px;
-        }
-        h1 {
-          display: grid;
-          justify-content: center;
-          align-items: center;
-          
-        }
-    .todo-div {
-        max-width: 480px;
-    }
-}
+
+
+
+
       </style>
       
        
