@@ -14,6 +14,15 @@
   column-gap: 5px;
   row-gap: 5px;
 }
+form{
+  border: 0 0 1px 0;
+  justify-items: center;
+  border-radius: 5px;
+  display: grid;
+  font-size: 15px;
+  grid-template-columns:1fr;
+  row-gap: 10px;
+}
 .user-input{
   border-color: green;
   border-width: 1px;
@@ -30,25 +39,28 @@
    
 }
 .add-btn {
+  margin: 10px 20px;
+  width: 150px;
   border: none;
   color: white;
   background-color: gray;
   border-radius: 20px;
   padding:10px;
 }
-          .active-btn {
+.active-btn {
   background-color: green;
-          }
+}
 
 .clear-btn {
   border: none;
+  margin-left: 25px;
   color: white;
   background-color: red;
   border-width: 1px;
   border-style: solid;
   border-radius: 20px;
   padding:10px;
-  width: 155px;
+  width: 150px;
 }
 .todo-div {
   display: grid;
@@ -72,11 +84,8 @@
   font-size: 15px;
 }
 p {
-  font-size: 20px;
+  font-size: 17px;
 
-}
-.striked {
-  text-decoration: line-through;
 }
 media (min-width:600px){
         .wrapper {
@@ -94,19 +103,33 @@ media (min-width:600px){
 }
       </style>
       
+       
       <h1>Todo Lists<h1>
       <div class="top-container">
-        <input type="text" class="user-input js-userInput" placeholder="Input a Todo" maxlengh="50" />
-        
-        <input type="date" class="due-date js-dateInput"/>
-        
-        <button class="add-btn js-addBtn" onclick="addTodo()"
-            >Add</button>
-        <button class="clear-btn js-clearAllBtn" onclick="cleared()">Clear all</button>
+        <div class="form1">
+          <form action="">
+            <label for="user-input">Input a todo</label>
+            <input type="text" class="user-input js-userInput" placeholder="Input a Todo"/>
+          </form>
         </div>
+        
+        <div class="form2">
+          <form action="">
+            <label for="date-input">Select a due date</label>
+            <input type="date" class="due-date js-dateInput"/>
+          </form>
+         </div>
+        
+        
+          
+        
+      </div>
+        <button class="add-btn js-addBtn"
+           disabled >Add</button>
+        <button class="clear-btn js-clearAllBtn" onclick="cleared()">Clear
+        all</button>
         <hr />
       <div id="todo-container" class="todo-box todo-div"></div>
-
       <script>
 
           //let todoArray = [];
