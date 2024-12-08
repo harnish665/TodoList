@@ -100,19 +100,15 @@ p {
   font-size: 17px;
 
 }
-
-
-
-
-      </style>
-      
-       
-      <h1>Todo Lists<h1>
+ </style>
+     <h1 class="title">Todo Lists<h1>
       <div class="top-container">
         <div class="form1">
           <form action="">
             <label for="user-input">Input a todo</label>
             <input type="text" class="user-input js-userInput" placeholder="Input a Todo"/>
+            <button class="add-btn js-addBtn"
+           disabled >Add</button>
           </form>
         </div>
         
@@ -120,17 +116,11 @@ p {
           <form action="">
             <label for="date-input">Select a due date</label>
             <input type="date" class="due-date js-dateInput"/>
+            <button class="clear-btn js-clearAllBtn" onclick="cleared()">Clear
+        all</button>
           </form>
          </div>
-        
-        
-          
-        
       </div>
-        <button class="add-btn js-addBtn"
-           disabled >Add</button>
-        <button class="clear-btn js-clearAllBtn" onclick="cleared()">Clear
-        all</button>
         <hr />
       <div id="todo-container" class="todo-box todo-div"></div>
       <script>
