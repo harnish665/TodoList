@@ -194,7 +194,7 @@ buttonElem.addEventListener("click", function () {
     return; // Prevent adding empty todos
   }
 
-  todoArray.push({
+  todoArray.unshift({
     name: todoName,
     date: dueDate,
   });
